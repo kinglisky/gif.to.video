@@ -1,5 +1,5 @@
 import './style.css';
-import gifURL from '/nichijo.gif';
+import gifURL from '/giphy.gif';
 import { setupFFmpegTranscode } from './ffmpeg';
 import { setupWebCodecsTranscode } from './web-codecs';
 
