@@ -1,0 +1,22 @@
+{
+  "name": "gif.transcoding.test",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "typescript": "^4.9.3",
+    "vite": "^4.2.0",
+    "vite-plugin-cross-origin-isolation": "^0.1.6"
+  },
+  "dependencies": {
+    "@ffmpeg/core": "^0.11.0",
+    "@ffmpeg/ffmpeg": "^0.11.6",
+    "gifuct-js": "^2.1.2",
+    "webm-writer": "^1.0.0"
+  }
+}
