@@ -1,4 +1,4 @@
-import { createFFmpeg, fetchFile } from '@ffmpeg/ffmpeg';
+import { createFFmpeg } from '@ffmpeg/ffmpeg';
 import { fetchArrayBuffer } from './utils';
 
 const corePath = `/ffmpeg/ffmpeg-core.js`;
