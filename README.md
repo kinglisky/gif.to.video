@@ -1,4 +1,4 @@
-# ffmepg 与 WebCodecs Gif 转码性能对比
+# ffmepg.wasm 与 webCodecs gif 转码性能对比
 
 ## Quick start
 
