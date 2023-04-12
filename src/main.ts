@@ -26,6 +26,7 @@ import './style.css';
 
     const gifSelector =
         document.querySelector<HTMLSelectElement>('#gif-selector')!;
+
     const inputGif = document.querySelector<HTMLImageElement>('#input-gif')!;
     const videos = document.querySelectorAll<HTMLVideoElement>('video');
     const infos = document.querySelectorAll<HTMLSpanElement>('.item-info-text');
