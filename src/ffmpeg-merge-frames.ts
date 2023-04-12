@@ -35,8 +35,7 @@ export function setupFFmpegMergeFrames(options: {
     };
 
     const startTranscode = async () => {
-        options.time.innerText = '开始转码...';
-        const startTime = new Date();
+        options.time.innerText = '加载 ffmepg.wasm';
         const ffmpeg = createFFmpeg({
             log: true,
             corePath,
@@ -44,6 +43,10 @@ export function setupFFmpegMergeFrames(options: {
             wasmPath,
         });
         await ffmpeg.load();
+
+        options.time.innerText = '开始转码...';
+        const startTime = new Date();
+
         const { frames } = await getGifFrames(options.inputGif.src);
         const canvas = document.createElement('canvas');
         canvas.width = frames[0].dims.width;

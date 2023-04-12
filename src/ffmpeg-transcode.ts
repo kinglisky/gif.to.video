@@ -12,8 +12,7 @@ export function setupFFmpegTranscode(options: {
     time: HTMLSpanElement;
 }) {
     const startTranscode = async () => {
-        options.time.innerText = '开始转码...';
-        const startTime = new Date();
+        options.time.innerText = '加载 ffmepg.wasm';
         const ffmpeg = createFFmpeg({
             log: true,
             corePath,
@@ -21,6 +20,9 @@ export function setupFFmpegTranscode(options: {
             wasmPath,
         });
         await ffmpeg.load();
+
+        options.time.innerText = '开始转码...';
+        const startTime = new Date();
         const inputName = `input.gif`;
         const outputName = `output.webm`;
         const gifBuffer = await fetchArrayBuffer(options.inputGif.src);
