@@ -76,7 +76,7 @@ const decodeGifToWebM = async (
     return URL.createObjectURL(webMBlob);
 };
 
-export function setupWebCodesGifToWebm(options: {
+export function setupImageDecodeWriteWebm(options: {
     gifURL: string;
     button: HTMLButtonElement;
     video: HTMLVideoElement;

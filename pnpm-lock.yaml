@@ -3,19 +3,23 @@ lockfileVersion: 5.4
 specifiers:
   '@ffmpeg/core': ^0.11.0
   '@ffmpeg/ffmpeg': ^0.11.6
+  '@types/dom-webcodecs': ^0.1.7
   gifuct-js: ^2.1.2
   typescript: ^4.9.3
   vite: ^4.2.0
   vite-plugin-cross-origin-isolation: ^0.1.6
+  webm-muxer: ^2.2.2
   webm-writer: ^1.0.0
 
 dependencies:
   '@ffmpeg/core': 0.11.0
   '@ffmpeg/ffmpeg': 0.11.6
   gifuct-js: 2.1.2
+  webm-muxer: 2.2.2
   webm-writer: 1.0.0
 
 devDependencies:
+  '@types/dom-webcodecs': 0.1.7
   typescript: 4.9.5
   vite: 4.2.1
   vite-plugin-cross-origin-isolation: 0.1.6
@@ -236,6 +240,13 @@ packages:
       - encoding
     dev: false
 
+  /@types/dom-webcodecs/0.1.7:
+    resolution: {integrity: sha512-1euwRyJ7rQrddOa24d5ZcoDRMp68xEIwyb7PKb3Wpc2OullUxHQ4a63WPa5V8R+KtCWISKjgS+f83HCUVhXS/w==}
+
+  /@types/wicg-file-system-access/2020.9.6:
+    resolution: {integrity: sha512-6hogE75Hl2Ov/jgp8ZhDaGmIF/q3J07GtXf8nCJCwKTHq7971po5+DId7grft09zG7plBwpF6ZU0yx9Du4/e1A==}
+    dev: false
+
   /esbuild/0.17.15:
     resolution: {integrity: sha512-LBUV2VsUIc/iD9ME75qhT4aJj0r75abCVS0jakhFzOtR7TQsqQA5w0tZ+KTKnwl3kXE0MhskNdHDh/I5aCR1Zw==}
     engines: {node: '>=12'}
@@ -425,6 +436,13 @@ packages:
 
   /webidl-conversions/3.0.1:
     resolution: {integrity: sha512-2JAn3z8AR6rjK8Sm8orRC0h/bcl/DqL7tRPdGZ4I1CjdF+EaMLmYxBHyXuKL849eucPFhvBoxMsflfOb8kxaeQ==}
+    dev: false
+
+  /webm-muxer/2.2.2:
+    resolution: {integrity: sha512-U1Fy4E5SPxjsyBbhzca4j5/kPqLhx9Z51NVe+DioTwAO/KNlJ+4shEvz6NLPCVvG/Am9tYnR+6NuquH2A24Xcg==}
+    dependencies:
+      '@types/dom-webcodecs': 0.1.7
+      '@types/wicg-file-system-access': 2020.9.6
     dev: false
 
   /webm-writer/1.0.0:
