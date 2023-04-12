@@ -1,40 +1,41 @@
 <section class="container">
     <div class="item-container">
         <img id="input-gif" />
+        <div id="gif-selector-container" class="item-info"></div>
     </div>
     <div class="item-container">
         <video id="ffmpeg-transcode-video" loop muted autoplay controls></video>
         <div class="item-info">
             <button id="ffmpeg-transcode-btn">FFmepg 直接转码 Gif</button>
-            <p id="ffmpeg-transcode-time">用时：---</p>
+            <p class="item-info-text" id="ffmpeg-transcode-time">用时：---</p>
         </div>
     </div>
     <div class="item-container">
         <video id="ffmpeg-frames-video" loop muted autoplay controls></video>
         <div class="item-info">
             <button id="ffmpeg-frames-btn">FFmepg 合并 Gif 图片帧</button>
-            <p id="ffmpeg-frames-time">用时：---</p>
+            <p class="item-info-text" id="ffmpeg-frames-time">用时：---</p>
         </div>
     </div>
     <div class="item-container">
         <video id="parse-gif-video" loop muted autoplay controls></video>
         <div class="item-info">
             <button id="parse-gif-btn">解析 Gif 生成 webM</button>
-            <p id="parse-gif-time">用时：---</p>
+            <p class="item-info-text" id="parse-gif-time">用时：---</p>
         </div>
     </div>
     <div class="item-container">
         <video id="web-codecs-video" loop muted autoplay controls></video>
         <div class="item-info">
             <button id="web-codecs-btn">ImageDecoder 转码生成 webM(webm-write)</button>
-            <p id="web-codecs-time">用时：---</p>
+            <p class="item-info-text" id="web-codecs-time">用时：---</p>
         </div>
     </div>
     <div class="item-container">
         <video id="web-codecs-mux-video" loop muted autoplay controls></video>
         <div class="item-info">
             <button id="web-codecs-mux-btn">ImageDecoder 转码生成 webM(webm-muxer)</button>
-            <p id="web-codecs-mux-time">用时：---</p>
+            <p class="item-info-text" id="web-codecs-mux-time">用时：---</p>
         </div>
     </div>
 </section>

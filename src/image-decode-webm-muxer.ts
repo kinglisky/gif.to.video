@@ -1,15 +1,4 @@
-import WebMWriter from 'webm-writer';
 import WebMMuxer from 'webm-muxer';
-
-const loadImage = (gifURL: string) => {
-    return new Promise<HTMLImageElement>((resolve) => {
-        const image = new Image();
-        image.onload = () => {
-            resolve(image);
-        };
-        image.src = gifURL;
-    });
-};
 
 const fetchImageByteStream = async (gifURL: string) => {
     const response = await fetch(gifURL);
@@ -59,13 +48,12 @@ const decodeGifMuxWebM = async (
 
         const webmVideoEncoder = new VideoEncoder({
             output: async (chunk, meta) => {
-                console.log(chunk, meta);
                 webmMuxer.addVideoChunk(chunk, meta);
 
                 // 转码结束
                 if (frameIndex === frameCount) {
                     await webmVideoEncoder.flush();
-                    webmVideoEncoder.close();
+                    // webmVideoEncoder.close();
 
                     const webmBuffer = webmMuxer.finalize()!;
                     const webmBlobURL = URL.createObjectURL(
@@ -100,7 +88,7 @@ const decodeGifMuxWebM = async (
 };
 
 export function setupImageDecodeMuxWebm(options: {
-    gifURL: string;
+    inputGif: HTMLImageElement;
     button: HTMLButtonElement;
     video: HTMLVideoElement;
     time: HTMLSpanElement;
@@ -109,8 +97,8 @@ export function setupImageDecodeMuxWebm(options: {
         options.time.innerText = '开始转码...';
         const startTime = new Date();
 
-        const image = await loadImage(options.gifURL);
-        const imageByteStream = await fetchImageByteStream(options.gifURL);
+        const image = options.inputGif;
+        const imageByteStream = await fetchImageByteStream(image.src);
         const imageDecoder = await createImageDecoder(imageByteStream);
 
         const webmBlobURL = await decodeGifMuxWebM(imageDecoder, {

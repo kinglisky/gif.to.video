@@ -1,14 +1,5 @@
+// @ts-ignore
 import WebMWriter from 'webm-writer';
-
-const loadImage = (gifURL: string) => {
-    return new Promise<HTMLImageElement>((resolve) => {
-        const image = new Image();
-        image.onload = () => {
-            resolve(image);
-        };
-        image.src = gifURL;
-    });
-};
 
 const fetchImageByteStream = async (gifURL: string) => {
     const response = await fetch(gifURL);
@@ -77,7 +68,7 @@ const decodeGifToWebM = async (
 };
 
 export function setupImageDecodeWriteWebm(options: {
-    gifURL: string;
+    inputGif: HTMLImageElement;
     button: HTMLButtonElement;
     video: HTMLVideoElement;
     time: HTMLSpanElement;
@@ -86,8 +77,8 @@ export function setupImageDecodeWriteWebm(options: {
         options.time.innerText = '开始转码...';
         const startTime = new Date();
 
-        const image = await loadImage(options.gifURL);
-        const imageByteStream = await fetchImageByteStream(options.gifURL);
+        const image = options.inputGif;
+        const imageByteStream = await fetchImageByteStream(image.src);
         const imageDecoder = await createImageDecoder(imageByteStream);
 
         const canvas = document.createElement('canvas');

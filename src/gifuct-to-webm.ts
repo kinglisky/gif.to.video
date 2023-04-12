@@ -1,4 +1,5 @@
 import { parseGIF, decompressFrames } from 'gifuct-js';
+// @ts-ignore
 import WebMWriter from 'webm-writer';
 import { fetchArrayBuffer } from './utils';
 
@@ -49,7 +50,7 @@ async function gifToWebM(gifUrl: string) {
 }
 
 export function setupParseGifToWebm(options: {
-    gifURL: string;
+    inputGif: HTMLImageElement;
     button: HTMLButtonElement;
     video: HTMLVideoElement;
     time: HTMLSpanElement;
@@ -58,7 +59,7 @@ export function setupParseGifToWebm(options: {
         options.time.innerText = '开始转码...';
         const startTime = new Date();
 
-        const webMURL = await gifToWebM(options.gifURL);
+        const webMURL = await gifToWebM(options.inputGif.src);
         options.video.src = webMURL;
         const endTime = new Date();
         const duration = (endTime.getTime() - startTime.getTime()) / 1000;

@@ -6,7 +6,7 @@ const workerPath = `/ffmpeg/ffmpeg-core.worker.js`;
 const wasmPath = `/ffmpeg/ffmpeg-core.wasm`;
 
 export function setupFFmpegTranscode(options: {
-    gifURL: string;
+    inputGif: HTMLImageElement;
     button: HTMLButtonElement;
     video: HTMLVideoElement;
     time: HTMLSpanElement;
@@ -23,7 +23,7 @@ export function setupFFmpegTranscode(options: {
         await ffmpeg.load();
         const inputName = `input.gif`;
         const outputName = `output.webm`;
-        const gifBuffer = await fetchArrayBuffer(options.gifURL);
+        const gifBuffer = await fetchArrayBuffer(options.inputGif.src);
 
         ffmpeg.FS('writeFile', inputName, new Uint8Array(gifBuffer));
 

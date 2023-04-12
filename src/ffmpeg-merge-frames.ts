@@ -7,7 +7,7 @@ const workerPath = `/ffmpeg/ffmpeg-core.worker.js`;
 const wasmPath = `/ffmpeg/ffmpeg-core.wasm`;
 
 export function setupFFmpegMergeFrames(options: {
-    gifURL: string;
+    inputGif: HTMLImageElement;
     button: HTMLButtonElement;
     video: HTMLVideoElement;
     time: HTMLSpanElement;
@@ -44,7 +44,7 @@ export function setupFFmpegMergeFrames(options: {
             wasmPath,
         });
         await ffmpeg.load();
-        const { frames, gif } = await getGifFrames(options.gifURL);
+        const { frames } = await getGifFrames(options.inputGif.src);
         const canvas = document.createElement('canvas');
         canvas.width = frames[0].dims.width;
         canvas.height = frames[0].dims.height;
@@ -68,7 +68,7 @@ export function setupFFmpegMergeFrames(options: {
 
         await ffmpeg.run(
             '-framerate',
-            '24',
+            String(1000 / frames[0].delay),
             '-i',
             'frame%04d.png',
             '-pix_fmt',
