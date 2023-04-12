@@ -15,7 +15,7 @@ import './style.css';
         const options = gifList.map(
             (item) => `<option value="${item.url}">${item.name}</option>`
         );
-        return `图片选择：<select id="gif-selector">${options.join(
+        return `Gif 选择：<select id="gif-selector">${options.join(
             ''
         )}</select>`;
     };
