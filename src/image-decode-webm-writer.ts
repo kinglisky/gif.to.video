@@ -6,13 +6,7 @@ const fetchImageByteStream = async (gifURL: string) => {
     return response.body!;
 };
 
-const createImageDecoder = async (
-    imageByteStream: ReadableStream<Uint8Array>
-) => {
-    if (typeof ImageDecoder === 'undefined') {
-        return;
-    }
-
+const createImageDecoder = async (imageByteStream: ReadableStream<Uint8Array>) => {
     const imageDecoder = new ImageDecoder({
         data: imageByteStream,
         type: 'image/gif',
@@ -20,21 +14,20 @@ const createImageDecoder = async (
 
     await imageDecoder.tracks.ready;
     await imageDecoder.completed;
-
-    console.log('imageDecoder', imageDecoder);
     return imageDecoder;
 };
 
-const decodeGifToWebM = async (
-    imageDecoder: any,
-    canvas: HTMLCanvasElement
-) => {
-    const canvasContext = canvas.getContext('2d')!;
-    const frameCount = imageDecoder.tracks.selectedTrack.frameCount;
-
+const decodeGifToWebM = async (imageDecoder: ImageDecoder) => {
+    const frameCount = imageDecoder.tracks.selectedTrack!.frameCount;
     const { image: headFrame } = await imageDecoder.decode({ frameIndex: 0 });
-    const frameDuration = headFrame.duration / 1000;
+    const frameDuration = headFrame.duration! / 1000;
+
     console.log({ headFrame, frameCount, frameDuration });
+
+    const canvas = document.createElement('canvas');
+    canvas.width = headFrame.codedWidth;
+    canvas.height = headFrame.codedHeight;
+    const canvasContext = canvas.getContext('2d')!;
 
     const videoWriter = new WebMWriter({
         quality: 1, // WebM image quality from 0.0 (worst) to 0.99999 (best), 1.00 (VP8L lossless) is not supported
@@ -80,12 +73,7 @@ export function setupImageDecodeWriteWebm(options: {
         const image = options.inputGif;
         const imageByteStream = await fetchImageByteStream(image.src);
         const imageDecoder = await createImageDecoder(imageByteStream);
-
-        const canvas = document.createElement('canvas');
-        canvas.width = image.naturalWidth;
-        canvas.height = image.naturalHeight;
-
-        const webmBlobURL = await decodeGifToWebM(imageDecoder, canvas);
+        const webmBlobURL = await decodeGifToWebM(imageDecoder);
 
         options.video.src = webmBlobURL;
 

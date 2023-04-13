@@ -5,13 +5,7 @@ const fetchImageByteStream = async (gifURL: string) => {
     return response.body!;
 };
 
-const createImageDecoder = async (
-    imageByteStream: ReadableStream<Uint8Array>
-) => {
-    if (typeof ImageDecoder === 'undefined') {
-        return;
-    }
-
+const createImageDecoder = async (imageByteStream: ReadableStream<Uint8Array>) => {
     const imageDecoder = new ImageDecoder({
         data: imageByteStream,
         type: 'image/gif',
@@ -24,10 +18,7 @@ const createImageDecoder = async (
     return imageDecoder;
 };
 
-const decodeGifMuxWebM = async (
-    imageDecoder: ImageDecoder,
-    size: { width: number; height: number }
-) => {
+const decodeGifMuxWebM = async (imageDecoder: ImageDecoder) => {
     const { image: headFrame } = await imageDecoder.decode({ frameIndex: 0 });
     const frameDuration = headFrame.duration! / 1000;
     const frameCount = imageDecoder.tracks.selectedTrack!.frameCount;
@@ -37,8 +28,8 @@ const decodeGifMuxWebM = async (
             target: 'buffer',
             video: {
                 codec: 'V_VP9',
-                width: size.width,
-                height: size.height,
+                width: headFrame.codedWidth,
+                height: headFrame.codedHeight,
                 frameRate: 1000 / frameDuration,
                 alpha: true,
             },
@@ -56,9 +47,7 @@ const decodeGifMuxWebM = async (
 
                     const webmBuffer = webmMuxer.finalize()!;
                     // webmVideoEncoder.close();
-                    const webmBlobURL = URL.createObjectURL(
-                        new Blob([webmBuffer])
-                    );
+                    const webmBlobURL = URL.createObjectURL(new Blob([webmBuffer]));
                     resolve(webmBlobURL);
                 }
             },
@@ -67,8 +56,8 @@ const decodeGifMuxWebM = async (
 
         webmVideoEncoder.configure({
             codec: 'vp09.00.10.08',
-            width: size.width,
-            height: size.height,
+            width: headFrame.codedWidth,
+            height: headFrame.codedHeight,
             bitrate: 1e6,
         });
 
@@ -100,11 +89,7 @@ export function setupImageDecodeMuxWebm(options: {
         const image = options.inputGif;
         const imageByteStream = await fetchImageByteStream(image.src);
         const imageDecoder = await createImageDecoder(imageByteStream);
-
-        const webmBlobURL = await decodeGifMuxWebM(imageDecoder, {
-            width: image.naturalWidth,
-            height: image.naturalHeight,
-        });
+        const webmBlobURL = await decodeGifMuxWebM(imageDecoder);
 
         options.video.src = webmBlobURL;
 

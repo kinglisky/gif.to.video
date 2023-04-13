@@ -3,6 +3,8 @@ import { setupFFmpegMergeFrames } from './ffmpeg-merge-frames';
 import { setupParseGifToWebm } from './gifuct-to-webm';
 import { setupImageDecodeWriteWebm } from './image-decode-webm-writer';
 import { setupImageDecodeMuxWebm } from './image-decode-webm-muxer';
+import { setupImageDecodeRecordWebm } from './record-to-webm';
+
 import { testImageDecoder } from './demo';
 
 import gifList from './gif-list';
@@ -13,20 +15,13 @@ import './style.css';
     document.querySelector<HTMLDivElement>('#app')!.innerHTML = appHTML;
 
     const createSelector = () => {
-        const options = gifList.map(
-            (item) => `<option value="${item.url}">${item.name}</option>`
-        );
-        return `Gif 选择：<select id="gif-selector">${options.join(
-            ''
-        )}</select>`;
+        const options = gifList.map((item) => `<option value="${item.url}">${item.name}</option>`);
+        return `Gif 选择：<select id="gif-selector">${options.join('')}</select>`;
     };
 
-    document.querySelector<HTMLDivElement>(
-        '#gif-selector-container'
-    )!.innerHTML = createSelector();
+    document.querySelector<HTMLDivElement>('#gif-selector-container')!.innerHTML = createSelector();
 
-    const gifSelector =
-        document.querySelector<HTMLSelectElement>('#gif-selector')!;
+    const gifSelector = document.querySelector<HTMLSelectElement>('#gif-selector')!;
 
     const inputGif = document.querySelector<HTMLImageElement>('#input-gif')!;
     const videos = document.querySelectorAll<HTMLVideoElement>('video');
@@ -49,15 +44,9 @@ import './style.css';
      */
     setupFFmpegTranscode({
         inputGif,
-        button: document.querySelector<HTMLButtonElement>(
-            '#ffmpeg-transcode-btn'
-        )!,
-        video: document.querySelector<HTMLVideoElement>(
-            '#ffmpeg-transcode-video'
-        )!,
-        time: document.querySelector<HTMLSpanElement>(
-            '#ffmpeg-transcode-time'
-        )!,
+        button: document.querySelector<HTMLButtonElement>('#ffmpeg-transcode-btn')!,
+        video: document.querySelector<HTMLVideoElement>('#ffmpeg-transcode-video')!,
+        time: document.querySelector<HTMLSpanElement>('#ffmpeg-transcode-time')!,
     });
 
     /**
@@ -65,12 +54,8 @@ import './style.css';
      */
     setupFFmpegMergeFrames({
         inputGif,
-        button: document.querySelector<HTMLButtonElement>(
-            '#ffmpeg-frames-btn'
-        )!,
-        video: document.querySelector<HTMLVideoElement>(
-            '#ffmpeg-frames-video'
-        )!,
+        button: document.querySelector<HTMLButtonElement>('#ffmpeg-frames-btn')!,
+        video: document.querySelector<HTMLVideoElement>('#ffmpeg-frames-video')!,
         time: document.querySelector<HTMLSpanElement>('#ffmpeg-frames-time')!,
     });
 
@@ -99,13 +84,19 @@ import './style.css';
      */
     setupImageDecodeMuxWebm({
         inputGif,
-        button: document.querySelector<HTMLButtonElement>(
-            '#web-codecs-mux-btn'
-        )!,
-        video: document.querySelector<HTMLVideoElement>(
-            '#web-codecs-mux-video'
-        )!,
+        button: document.querySelector<HTMLButtonElement>('#web-codecs-mux-btn')!,
+        video: document.querySelector<HTMLVideoElement>('#web-codecs-mux-video')!,
         time: document.querySelector<HTMLSpanElement>('#web-codecs-mux-time')!,
+    });
+
+    /**
+     * 通过录制 canvas 创建 webm
+     */
+    setupImageDecodeRecordWebm({
+        inputGif,
+        button: document.querySelector<HTMLButtonElement>('#web-record-btn')!,
+        video: document.querySelector<HTMLVideoElement>('#web-record-video')!,
+        time: document.querySelector<HTMLSpanElement>('#web-record-time')!,
     });
 
     testImageDecoder(gifList[0].url);

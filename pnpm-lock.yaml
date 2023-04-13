@@ -4,6 +4,7 @@ specifiers:
   '@ffmpeg/core': ^0.11.0
   '@ffmpeg/ffmpeg': ^0.11.6
   '@types/dom-webcodecs': ^0.1.7
+  fix-webm-duration: ^1.0.5
   gifuct-js: ^2.1.2
   typescript: ^4.9.3
   vite: ^4.2.0
@@ -14,6 +15,7 @@ specifiers:
 dependencies:
   '@ffmpeg/core': 0.11.0
   '@ffmpeg/ffmpeg': 0.11.6
+  fix-webm-duration: 1.0.5
   gifuct-js: 2.1.2
   webm-muxer: 2.2.2
   webm-writer: 1.0.0
@@ -276,6 +278,10 @@ packages:
       '@esbuild/win32-ia32': 0.17.15
       '@esbuild/win32-x64': 0.17.15
     dev: true
+
+  /fix-webm-duration/1.0.5:
+    resolution: {integrity: sha512-b6oula3OfSknx0aWoLsxvp4DVIYbwsf+UAkr6EDAK3iuMYk/OSNKzmeSI61GXK0MmFTEuzle19BPvTxMIKjkZg==}
+    dev: false
 
   /fsevents/2.3.2:
     resolution: {integrity: sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA==}

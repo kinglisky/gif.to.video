@@ -2,7 +2,7 @@
 
 ## 示例
 
-https://gif-to-wasm-video.vercel.app 貌似胡需要翻墙了
+https://gif-to-wasm-video.vercel.app 貌似需要翻墙了
 
 ## 开发
 
