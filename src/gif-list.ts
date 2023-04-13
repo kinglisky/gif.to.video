@@ -7,8 +7,8 @@ import nichijo5 from '/nichijo5.gif';
 import nichijo6 from '/nichijo6.gif';
 import nichijo7 from '/nichijo7.gif';
 import nichijo8 from '/nichijo8.gif';
-import nichijo9 from '/nichijo9.gif';
 import heart from '/heart.gif';
+import s30 from '/30s.gif';
 
 export default [
     {
@@ -48,8 +48,8 @@ export default [
         url: nichijo8,
     },
     {
-        name: 'nichijo9',
-        url: nichijo9,
+        name: '30s',
+        url: s30,
     },
     {
         name: 'heart',

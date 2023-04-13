@@ -1,6 +1,10 @@
 # ffmepg.wasm 与 webCodecs gif 转码性能对比
 
-## Quick start
+## 示例
+
+https://gif-to-wasm-video.vercel.app 貌似胡需要翻墙了
+
+## 开发
 
 ```bash
 pnpm i

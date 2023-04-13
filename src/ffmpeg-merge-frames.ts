@@ -85,10 +85,11 @@ export function setupFFmpegMergeFrames(options: {
         const url = URL.createObjectURL(blob);
         options.video.src = url;
 
-        // ffmpeg.FS('unlink', inputName);
         const endTime = new Date();
         const duration = (endTime.getTime() - startTime.getTime()) / 1000;
         options.time.innerText = `转码完成，用时 ${duration}s`;
+
+        ffmpeg.exit();
     };
 
     options.button.addEventListener('click', startTranscode, false);

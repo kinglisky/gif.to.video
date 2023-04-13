@@ -32,6 +32,8 @@ export function setupFFmpegTranscode(options: {
         await ffmpeg.run(
             '-i',
             inputName,
+            '-row-mt',
+            '1',
             '-vf',
             // gif 图片的分辨率不满足偶数像素，转码会引起报错，这里做个修正
             'pad=ceil(iw/2)*2:ceil(ih/2)*2',
@@ -51,6 +53,8 @@ export function setupFFmpegTranscode(options: {
         const endTime = new Date();
         const duration = (endTime.getTime() - startTime.getTime()) / 1000;
         options.time.innerText = `转码完成，用时 ${duration}s`;
+
+        ffmpeg.exit();
     };
 
     options.button.addEventListener('click', startTranscode, false);
