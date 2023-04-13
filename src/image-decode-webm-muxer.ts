@@ -25,12 +25,12 @@ const createImageDecoder = async (
 };
 
 const decodeGifMuxWebM = async (
-    imageDecoder: any,
+    imageDecoder: ImageDecoder,
     size: { width: number; height: number }
 ) => {
     const { image: headFrame } = await imageDecoder.decode({ frameIndex: 0 });
-    const frameDuration = headFrame.duration / 1000;
-    const frameCount = imageDecoder.tracks.selectedTrack.frameCount;
+    const frameDuration = headFrame.duration! / 1000;
+    const frameCount = imageDecoder.tracks.selectedTrack!.frameCount;
 
     return new Promise<string>((resolve) => {
         const webmMuxer = new WebMMuxer({
@@ -53,9 +53,9 @@ const decodeGifMuxWebM = async (
                 // 转码结束
                 if (frameIndex === frameCount) {
                     await webmVideoEncoder.flush();
-                    // webmVideoEncoder.close();
 
                     const webmBuffer = webmMuxer.finalize()!;
+                    // webmVideoEncoder.close();
                     const webmBlobURL = URL.createObjectURL(
                         new Blob([webmBuffer])
                     );
