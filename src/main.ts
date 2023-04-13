@@ -3,6 +3,7 @@ import { setupFFmpegMergeFrames } from './ffmpeg-merge-frames';
 import { setupParseGifToWebm } from './gifuct-to-webm';
 import { setupImageDecodeWriteWebm } from './image-decode-webm-writer';
 import { setupImageDecodeMuxWebm } from './image-decode-webm-muxer';
+import { testImageDecoder } from './demo';
 
 import gifList from './gif-list';
 import appHTML from './app.html?raw';
@@ -106,4 +107,6 @@ import './style.css';
         )!,
         time: document.querySelector<HTMLSpanElement>('#web-codecs-mux-time')!,
     });
+
+    testImageDecoder(gifList[0].url);
 })();
